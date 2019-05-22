@@ -1,0 +1,35 @@
+{
+  "dirs": {
+    "working": "build"
+  },
+  "build": {
+    "package": {
+      "name": "azure-reaper-deploy"
+    },
+    "files": [
+      {
+        "source": "src/",
+        "target": "src/"
+      },
+      {
+        "source": "azuredeploy.json",
+        "target": ""
+      }
+    ],
+    "functions": [],
+    "patch": [],
+    "detect": []
+  },
+  "deploy": {
+    "templateFile": "azuredeploy.json",
+    "resourceGroup": {
+      "name": "rjs-reaper-deploy",
+      "location": "westeurope"
+    },
+    "storageAccount": {
+      "name": "ufmnrk9rhw1k2ftk",
+      "containerName": "rjs",
+      "groupName": "Shared-Resources"
+    }
+  }
+}

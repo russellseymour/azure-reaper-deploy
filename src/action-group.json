@@ -1,0 +1,61 @@
+{  
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "name": {
+      "type": "string"
+    },
+    "short_name": {
+      "type": "string"
+    },
+    "logicapp_name": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "object"
+    }
+  },
+  "variables": {
+    "name": {
+      "actionGroup": "[parameters('name')]",
+      "actionGroupShortName": "[parameters('short_name')]",
+      "logicApps": {
+        "alert": "[parameters('logicapp_name')]"
+      }
+    },
+    "apiVersions": {
+      "logicApp": "2017-07-01",
+      "actionGroup": "2018-03-01"
+    }
+  },
+  "resources": [
+    {
+      "comments": "Action group stating which function should be targetted for alerts",
+      "type": "Microsoft.Insights/actionGroups",
+      "name": "[variables('name').actionGroup]",
+      "apiVersion": "[variables('apiVersions').actionGroup]",
+      "tags": "[parameters('tags')]",
+      "location": "Global",
+      "properties": {
+          "groupShortName": "[toLower(variables('name').actionGroupShortName)]",
+          "enabled": true,
+          "emailReceivers": [
+              {
+                  "name": "EmailNotify",
+                  "emailAddress": "rseymour@chef.io"
+              }
+          ],
+          "logicAppReceivers": [
+              {
+                  "name": "LogicAppNotify",
+                  "resourceId": "[resourceId('Microsoft.Logic/workflows', variables('name').logicApps.alert)]",
+                  "callbackUrl": "[listCallbackUrl(resourceId('Microsoft.Logic/workflows/triggers', variables('name').logicApps.alert, 'manual'), variables('apiVersions').logicApp).value]"
+              }
+          ]
+      }
+  }
+  ],
+  "outputs": {
+    
+  }
+}
