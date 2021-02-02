@@ -103,13 +103,17 @@
         "branch": "[parameters('reaperRepoBranch')]"
       },
       "apiVersions": {
-          "deployments": "2017-05-10",
-          "sites": "2016-08-01",
-          "actionGroup": "2018-03-01",
-          "activityLogAlerts": "2017-04-01",
-          "servicePlanConfig": "2016-08-01",
-          "logicApp": "2017-07-01",
-          "connections": "2016-06-01"
+          "applicationInsights": "2015-05-01",
+          "actionGroup": "2019-06-01",
+          "activityLogAlerts": "2020-10-01",
+          "connections": "2016-06-01",
+          "cosmosdb": "2020-09-01",
+          "deployments": "2020-10-01",
+          "logicApp": "2019-05-01",
+          "serverFarms": "2020-09-01",
+          "sites": "2020-09-01",
+          "sourceControls": "2020-09-01",
+          "storageAccount": "2019-06-01"
       },
       "sasTokenFromDeployment": "[if(parameters('autoDiscoverSASToken'), if(contains(deployment().properties, 'templateLink'), if(equals(length(split(deployment().properties.templateLink.uri, '?')), 2), last(split(deployment().properties.templateLink.uri, '?')), ''), ''), '')]",
       "templateUrlQueryString": "[if(empty(parameters('azureStorageSASToken')), if(empty(variables('sasTokenFromDeployment')), '', concat('?', variables('sasTokenFromDeployment'))), concat('?', parameters('azureStorageSASToken')))]",
@@ -139,6 +143,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },
                   "location": {
                       "value": "[variables('location')]"
                   },
@@ -164,6 +171,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },
                   "location": {
                       "value": "[variables('location')]"
                   },
@@ -189,6 +199,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },                  
                   "location": {
                       "value": "[variables('location')]"
                   },
@@ -214,6 +227,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  }, 
                   "location": {
                       "value": "[variables('location')]"
                   },
@@ -247,6 +263,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  }, 
                   "location": {
                       "value": "[variables('location')]"
                   },
@@ -296,6 +315,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },
                   "name": {
                       "value": "[variables('name').azurequeues]"
                   },
@@ -327,6 +349,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },                  
                   "name": {
                       "value": "[variables('name').logicApps.alert]"
                   },
@@ -364,6 +389,9 @@
                   "contentVersion": "1.0.0.0"
               },
               "parameters": {
+                  "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },  
                   "name": {
                       "value": "[variables('name').actionGroup]"
                   },
@@ -395,6 +423,9 @@
                 "contentVersion": "1.0.0.0"
             },
             "parameters": {
+                "apiVersions": {
+                      "value": "[variables('apiVersions')]"
+                  },
                 "name": {
                     "value": "[variables('name').activityLogAlerts]"
                 },

@@ -38,6 +38,9 @@
                 "description": "Branch of the repo that should be deployed"
             },
             "defaultValue": "release"
+        },
+        "apiVersions": {
+            "type": "object"
         }
     },
     "variables": {
@@ -53,10 +56,10 @@
             "id": "[parameters('servicePlanId')]"
         },
         "apiVersions": {
-            "sites": "2016-08-01",
-            "cosmosdb": "2015-04-08",
-            "sa": "2018-02-01",
-            "sourcecontrols": "2018-02-01"
+            "sites": "[parameters('apiVersions').sites]",
+            "cosmosdb": "[parameters('apiVersions').cosmosdb]",
+            "sa": "[parameters('apiVersions').storageAccount]",
+            "sourcecontrols": "[parameters('apiVersions').sourceControls]"
         },
         "repo": {
             "url": "[parameters('repoUrl')]",

@@ -10,6 +10,9 @@
     },
     "tags": {
       "type": "object"
+    },
+    "apiVersions": {
+      "type": "object"
     }
   },
   "variables": {
@@ -17,7 +20,7 @@
       "cosmosdb": "[parameters('name')]"
     },
     "apiVersions": {
-      "cosmosdb": "2015-04-08"
+      "cosmosdb": "[parameters('apiVersions').cosmosdb]"
     },
     "location": "[parameters('location')]"
   },

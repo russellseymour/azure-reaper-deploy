@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
@@ -10,6 +10,9 @@
     },
     "tags": {
       "type": "object"
+    },
+    "apiVersions": {
+      "type": "object"
     }
   },
   "variables": {
@@ -17,7 +20,7 @@
       "applicationInsights": "[parameters('name')]"
     },
     "apiVersions": {
-      "applicationInsights": "2015-05-01"
+      "applicationInsights": "[parameters('apiVersions').applicationInsights]"
     },
     "location": "[parameters('location')]"
   },

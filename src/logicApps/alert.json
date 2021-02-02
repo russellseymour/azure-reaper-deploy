@@ -1,5 +1,5 @@
 {  
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "name": {
@@ -19,6 +19,9 @@
     },
     "tags": {
       "type": "object"
+    },
+    "apiVersions": {
+        "type": "object"
     }
   },
   "variables": {
@@ -32,8 +35,8 @@
     },
     "location": "[parameters('location')]",
     "apiVersions": {
-      "logicApp": "2017-07-01",
-      "connections": "2016-06-01"
+      "logicApp": "[parameters('apiVersions').logicApp]",
+      "connections": "[parameters('apiVersions').connections]"
     }
   },
   "resources": [
