@@ -6,7 +6,7 @@
 
   <div class="page-wrap">
     <div class="side-bar">
-      <a href="{{ site.url }}{{ site.baseurl }}" class="site-title fs-6 lh-tight"><img src="/images/logo.png" /></a>
+      <a href="{{ site.url }}{{ site.baseurl }}" class="site-title fs-6 lh-tight"><img src="/azure-reaper/images/logo.png" /></a>
       <span class="fs-3"><button class="js-main-nav-trigger navigation-list-toggle btn btn-outline" type="button" data-text-toggle="Hide">Menu</button></span>
       <div class="navigation main-nav js-main-nav" style="margin-top: 150px">
         {% include nav.html %}
@@ -57,7 +57,6 @@
           {% endif %}
         {% endunless %}
         <div id="main-content" class="page-content" role="main">
-          <div class="summary">Reading time: {{ content | reading_time }}</div>
 
           {{ content }}
 
