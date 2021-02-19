@@ -5,36 +5,33 @@ title: Overview
 nav_order: 10
 ---
 
-# Overview
+# Azure Reaper
+{: .no_toc }
 
-This repository contains all of the templates that are required to deploy the Azure Reaper. It only concerns the deployment of the Reaper, if information about how the Reaper works and settings is required then please go to [Azure Reaper](https://chef-partners.github.io/chef-partners/azure-reaper).
+Azure Reaper is an Azure function that helps to manage resources in Azure. Using a tagging system is will shutdown and startup machines and delete them after an expiration period.
+{: .fs-6 .fw-300 }
 
-When deploying the functions, the built in Continuous Delivery options in Azure Functions are utilised. This means that the code is tale from the `release` branch of `github.com/chef-partners/azure-reaper` by default. Whenever we update the code, all Azure Reaper instances that have been deployed using that will be updated to the code in that branch. If this is something that is not desired then please fork the Azure Reaper code so that updates only occur when required.
+## Table of contents
+{: .no_toc .text-delta }
 
-## Quick Start
+1. TOC
+{:toc}
+---
 
-{% include tip.html content="It is highly recommended that the documentation is read and understood before deploying the Reaper into an Azure subscription." %}
+The Azure Reaper has been designed to help with the management of costs within an Azure subscription. It does this by focusing on reducing the time that Virtual Machines are actively running, e.g. the time that they are needed. It will also ensure that resources are not left around to run indefinitely.
 
-In order to to deploy the template a parameters file is required. The following shows an example of such a file:
+When a new resource group is created the Reaper will use the event information to automatically tag the resource group with an owner, an email address and the creation date.
 
-{% markdown shared/parameters_file.md %}
+![Tagged Resource Groups](/images/tagged_resource_groups.png)
 
-The Reaper can be deployed using the defaults and thus no parameters, however it is expected that some taoliring is required for the environment that the Reaper will operate. Please refer to the [Deployment Parameters]({% link docs/parameters/parameters.md %}) for more information.
+The automatic tagging of a resource group is necessary as Azure does not provide this information when a resource group is interrogated.
 
-The following examples show how the templates can be deployed using either Azure CLI or PowerShell. It is assumed that the parameters file has been saved into the same directory as the command is being run from.
+Once the Reaper is enabled for a subscription it will perform the following tasks:
 
-### Azure CLI
+ - shutdown and startup machines according to a specified time window
+ - removal of resource groups after an expiration time, default of 7 days
 
-```bash
-az group create -n Azure-Reaper -l westeurope
-az group deployment create -g Azure-Reaper --template-uri https://raw.githubusercontent.com/chef-partners/azure-reaper/release/azuredeploy.json -p parameters.json
-```
+Production resource groups can be protected against being reaped by using another tag - `inUse`. By default, if the default settings are used, virtual machines are able to run between 0800 and 1800 Monday to Friday. This can be modified using more tags and can be set to work with other timezones.
+## Quick Deployment
 
-### PowerShell
-
-```powershell
-New-AzureRmResourceGroup -Name Azure-Reaper -Location westeurope
-New-AzureRmResourceGroupDeployment -ResourceGroupName Azure-Reaper `
-                                   -TemplateUri https://raw.githubusercontent.com/chef-partners/azure-reaper/release/azuredeploy.json `
-                                   -TemplateParameterFile parameters.json
-```
+{% include shared/deployment.md %}

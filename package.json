@@ -12,6 +12,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "arm-template-deploy": "file:///c:/Users/russells/workspaces/turtlesystems/nodejs/arm-template-deploy"
+    "deploy-arms": "russellseymour/deploy-arms"
   }
 }

@@ -33,7 +33,7 @@
           "type": "bool",
           "defaultValue": false,
           "metadata": {
-              "description": "State if the template should try to auto discover the SAS token from the deployment. This is used when building and testing the template in VSTS."
+              "description": "State if the template should try to auto discover the SAS token from the deployment. This is used when building and testing the template in Azure DevOps."
           }
       },
       "azureStorageSASToken": {

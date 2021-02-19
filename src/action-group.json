@@ -33,7 +33,7 @@
   },
   "resources": [
     {
-      "comments": "Action group stating which function should be targetted for alerts",
+      "comments": "Action group stating which function should be targeted for alerts",
       "type": "Microsoft.Insights/actionGroups",
       "name": "[variables('name').actionGroup]",
       "apiVersion": "[variables('apiVersions').actionGroup]",
@@ -45,7 +45,7 @@
           "emailReceivers": [
               {
                   "name": "EmailNotify",
-                  "emailAddress": "rseymour@chef.io"
+                  "emailAddress": "russell.seymour@amido.com"
               }
           ],
           "logicAppReceivers": [
